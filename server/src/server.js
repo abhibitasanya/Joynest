@@ -10,7 +10,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import { v2 as cloudinary } from 'cloudinary';
-import { CloudinaryStorage } from 'multer-storage-cloudinary';
+import cloudinaryStorage from 'multer-storage-cloudinary';
 
 dotenv.config();
 
@@ -28,10 +28,18 @@ cloudinary.config({
 });
 
 // Database connection (Supabase)
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
-});
+let pool = null;
+let dbAvailable = false;
+
+if (process.env.DATABASE_URL) {
+  pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+  });
+  dbAvailable = true;
+} else {
+  console.log('⚠️  DATABASE_URL not configured - database features will be disabled');
+}
 
 // Middleware
 app.use(cors({
@@ -42,7 +50,7 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // Cloudinary storage configuration
-const storage = new CloudinaryStorage({
+const storage = cloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: 'joynest',
@@ -91,6 +99,13 @@ function authenticateToken(req, res, next) {
   });
 }
 
+// Database helper
+function checkDB() {
+  if (!dbAvailable || !pool) {
+    throw new Error('Database not available');
+  }
+}
+
 // Error handling middleware
 function asyncHandler(fn) {
   return (req, res, next) => {
@@ -100,7 +115,16 @@ function asyncHandler(fn) {
 
 // Initialize database tables
 async function initDB() {
+  if (!dbAvailable) {
+    console.log('⚠️  Database not configured - skipping initialization');
+    return;
+  }
+  
   try {
+    // Test database connection first
+    await pool.query('SELECT NOW()');
+    console.log('✅ Database connected successfully');
+    
     // Users table
     await pool.query(`
       CREATE TABLE IF NOT EXISTS users (
@@ -303,8 +327,9 @@ async function initDB() {
 
     console.log('✅ Database tables initialized successfully');
   } catch (error) {
-    console.error('❌ Error initializing database:', error);
-    throw error;
+    console.error('❌ Error initializing database:', error.message);
+    console.log('⚠️  Server will continue running in limited mode without database functionality');
+    // Don't throw error - allow server to start anyway
   }
 }
 
