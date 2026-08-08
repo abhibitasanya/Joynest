@@ -4,3 +4,7 @@ dist/
 .DS_Store
 *.log
 uploads/
+client/node_modules/
+client/dist/
+server/node_modules/
+server/uploads/

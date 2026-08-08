@@ -917,7 +917,7 @@ function NewProjectModal({ onClose, onCreate }: { onClose: () => void; onCreate:
             <div className="space-y-4">
               <p className="text-sm mb-5" style={{ color: '#8A7F74' }}>Give your memory a name</p>
               {[
-                { label: 'Project name', placeholder: 'e.g. Mum's 60th Birthday' },
+                { label: 'Project name', placeholder: "e.g. Mum's 60th Birthday" },
                 { label: 'For whom?', placeholder: 'e.g. Mum, Sarah, our family' },
                 { label: 'Occasion', placeholder: 'e.g. Birthday, Wedding, Travel...' },
               ].map(f => (
@@ -1164,7 +1164,7 @@ function EditorView({ onBack, onPublish }: { onBack: () => void; onPublish: () =
                       <div className="text-right text-xs mb-6" style={{ color: '#8A7F74', fontFamily: 'cursive' }}>London, 14th June 2025</div>
                       <p className="font-serif text-lg mb-4" style={{ color: '#1C3A2A', fontStyle: 'italic' }}>Dearest Mum,</p>
                       <p className="text-sm leading-relaxed mb-4" style={{ color: '#2A2A2A', fontFamily: 'var(--font-serif)' }}>
-                        Where do I even begin? You've been the greatest gift of my life. Every moment I've laughed, every tear you've dried, every warm embrace at the door — it's all you.
+                        Where do I even begin? You have been the greatest gift of my life. Every moment I have laughed, every tear you have dried, every warm embrace at the door — it is all you.
                       </p>
                       <p className="text-sm leading-relaxed" style={{ color: '#2A2A2A', fontFamily: 'var(--font-serif)' }}>
                         Happy 60th birthday to the most extraordinary woman I know.
