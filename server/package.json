@@ -9,6 +9,10 @@
     "dev": "node --watch src/server.js",
     "build": "echo 'No build step required'"
   },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "keywords": ["api", "backend", "joynest"],
   "author": "",
   "license": "ISC",
@@ -20,6 +24,8 @@
     "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.5-lts.1",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "cloudinary": "^2.0.0",
+    "multer-storage-cloudinary": "^2.1.0"
   }
 }
