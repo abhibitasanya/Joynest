@@ -10,3 +10,5 @@ vite.config.*.timestamp-*
 logs/
 *.log
 .tmp-*
+pnpm-lock.yaml
+package-lock.json

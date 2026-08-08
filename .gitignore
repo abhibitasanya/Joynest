@@ -8,3 +8,6 @@ client/node_modules/
 client/dist/
 server/node_modules/
 server/uploads/
+client/pnpm-lock.yaml
+client/package-lock.json
+server/package-lock.json
