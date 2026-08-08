@@ -1,0 +1,10 @@
+{
+  "description": "Create stunning interactive memory websites for special occasions with JoyNest, where users can preserve and share their cherished moments in a beautifully crafted experience.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
