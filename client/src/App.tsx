@@ -1696,7 +1696,13 @@ function PublishView({ onBack }: { onBack: () => void }) {
 }
 
 // ─── Landing Page ─────────────────────────────────────────────────────────────
-function LandingPage({ onStart, onAuth, onFeatureSelect }: { onStart: () => void; onAuth: () => void; onFeatureSelect: (feature: typeof features[0]) => void }) {
+function LandingPage({ onStart, onAuth, onFeatureSelect, selectedFeature, setSelectedFeature }: { 
+  onStart: () => void; 
+  onAuth: () => void; 
+  onFeatureSelect: (feature: typeof features[0]) => void;
+  selectedFeature: typeof features[0] | null;
+  setSelectedFeature: (feature: typeof features[0] | null) => void;
+}) {
   return (
     <div style={{ background: '#F8F6F8' }}>
       <HeroSection onStart={onAuth} />
@@ -1750,7 +1756,7 @@ function LandingPage({ onStart, onAuth, onFeatureSelect }: { onStart: () => void
         </div>
       )}
       
-      <TemplatesSection onStart={onAuth} onAuth={() => setShowAuth(true)} />
+      <TemplatesSection onStart={onAuth} onAuth={onAuth} />
       <TestimonialsSection />
       <FinalCTASection onStart={onAuth} />
       <Footer />
@@ -1790,6 +1796,8 @@ export default function App() {
           onStart={goToDash}
           onAuth={() => setShowAuth(true)}
           onFeatureSelect={setSelectedFeature}
+          selectedFeature={selectedFeature}
+          setSelectedFeature={setSelectedFeature}
         />
       )}
 
