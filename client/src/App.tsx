@@ -110,7 +110,7 @@ function Navbar({ onAuth, onDash, view }: { onAuth: () => void; onDash: () => vo
 }
 
 // ─── Hero Section ─────────────────────────────────────────────────────────────
-function HeroSection({ onStart }: { onStart: () => void }) {
+function HeroSection({ onStart, view }: { onStart: () => void; view: View }) {
   const particles = Array.from({ length: 18 }, (_, i) => ({
     left: `${Math.random() * 100}%`,
     bottom: '-20px',
@@ -169,7 +169,7 @@ function HeroSection({ onStart }: { onStart: () => void }) {
 
         <div className="animate-fadeInUp delay-400 flex flex-col sm:flex-row gap-4 justify-center mt-10">
           <button
-            onClick={onAuth}
+            onClick={onStart}
             className="btn-forest font-medium px-8 py-4 rounded-full text-base"
           >
             <span>Get Started</span>
@@ -270,7 +270,7 @@ function FeaturesSection({ onFeatureSelect }: { onFeatureSelect: (feature: typeo
               <div className="text-5xl mb-5 transform transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 inline-block animate-rotateFloat" style={{ animationDelay: `${i * 0.2}s` }}>{f.icon}</div>
               <h3 className="font-serif text-xl font-semibold mb-2" style={{ color: '#9A7FD0' }}>{f.title}</h3>
               <p className="text-sm leading-relaxed" style={{ color: '#A0A0A0' }}>{f.desc}</p>
-              <div className="mt-4 flex items-center gap-1 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ color: '#DCD0FF' }} onClick={() => setSelectedFeature(f)}>
+              <div className="mt-4 flex items-center gap-1 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ color: '#DCD0FF' }} onClick={() => onFeatureSelect(f)}>
                 Learn more <span className="group-hover:translate-x-1 transition-transform">→</span>
               </div>
             </div>
@@ -1705,7 +1705,7 @@ function LandingPage({ onStart, onAuth, onFeatureSelect, selectedFeature, setSel
 }) {
   return (
     <div style={{ background: '#F8F6F8' }}>
-      <HeroSection onStart={onAuth} />
+      <HeroSection onStart={onAuth} view="landing" />
       <FeaturesSection onFeatureSelect={onFeatureSelect} />
       
       {/* Feature Detail Modal */}
