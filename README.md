@@ -1,4 +1,4 @@
-# JoyNest(Work on progress)
+# JoyNest(Work in progress)
 
 A beautiful memory-making platform that lets users create interactive memory websites for birthdays, weddings, travel, and every precious moment.
 
